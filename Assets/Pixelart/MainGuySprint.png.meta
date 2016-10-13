@@ -1,0 +1,115 @@
+fileFormatVersion: 2
+guid: cca10fddc078bbc47980fdd7d8b48ea2
+timeCreated: 1475234641
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: MainGuySprint_0
+    21300002: MainGuySprint_1
+    21300004: MainGuySprint_2
+    21300006: MainGuySprint_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MainGuySprint_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 139
+        width: 43
+        height: 65
+      alignment: 9
+      pivot: {x: 0.5958421, y: 0.51152766}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MainGuySprint_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 138
+        width: 49
+        height: 66
+      alignment: 9
+      pivot: {x: 0.5725624, y: 0.53405946}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MainGuySprint_2
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 138
+        width: 55
+        height: 66
+      alignment: 9
+      pivot: {x: 0.552686, y: 0.55481464}
+      border: {x: 6, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MainGuySprint_3
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 140
+        width: 50
+        height: 64
+      alignment: 9
+      pivot: {x: 0.55994475, y: 0.54097795}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
