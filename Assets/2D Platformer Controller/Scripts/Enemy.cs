@@ -64,7 +64,6 @@ public class Enemy : MonoBehaviour
  
 
         //health
-        curHealth = 20;
         //stuff
         Debug.Log("movesp " + moveSpeed);
         OriginalMoveSpeed = moveSpeed;
@@ -124,7 +123,16 @@ public class Enemy : MonoBehaviour
                 moveSpeed = huntSpeed;
                 if (dir != Vector3.zero)
                 {
-                    var tar = new Vector2((target.position.x - me.position.x) * moveSpeed * Time.deltaTime, 0);
+                    var tar = new Vector2(0, 0);
+                    if(target.position.x - me.position.x < 0)
+                    {
+                        tar = new Vector2(-5 * moveSpeed * Time.deltaTime, 0);
+                    }
+                    else
+                    {
+                        tar = new Vector2(5*moveSpeed * Time.deltaTime, 0);
+                    }
+
                     controller.Move(tar, directionalInput);
                 }
                 LookForPlayerTimer = LookForPlayerTimer - Time.deltaTime;

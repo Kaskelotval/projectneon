@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     public GUIText comboText;
     public GUIText killText;
     public Animator scoreANIM;
-    public GameObject ScoreBoard;
     public GameObject death;
+    public bool killlimit = false;
 
     private int kills = 0;
     public int MaxKills;
@@ -91,13 +91,18 @@ public class Player : MonoBehaviour
             death.SetActive(true);
             combo = 0;
             UpdateScore();
+            if(!controller.collisions.below)
+            {
+                CalculateVelocity();
+                controller.Move(velocity * Time.deltaTime, directionalInput);
+
+            }
             //DestroyObject(attackTrigger);
             m_Anim.Play("MainGuyDeath");
             if (DeathTimer < 0)
             {
                 score = 0;
                 kills = 0;
-                SceneManager.LoadScene("Demo");
             }
             else
                 DeathTimer -= Time.deltaTime;
@@ -125,7 +130,7 @@ public class Player : MonoBehaviour
 
             if (attacking)
             {
-                velocity.x = velocity.x * 0.7f;
+                velocity.x = velocity.x * 0.9f;
                 if (attacktimer > 0)
                 {
                     //Debug.Log(attacktimer);
@@ -295,8 +300,13 @@ public class Player : MonoBehaviour
         scoreANIM.Play("ScoreBounce");
         UpdateScore();
 
-        if (kills == MaxKills)
-            ScoreBoard.SetActive(true);
+        if (kills == MaxKills && killlimit)
+        {
+            int i = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(i + 1);
+
+        }
+
 
 
     }
@@ -311,7 +321,8 @@ public class Player : MonoBehaviour
     }
     public void RestartScene()
     {
-        SceneManager.LoadScene("Demo");
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 
 }
