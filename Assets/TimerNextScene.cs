@@ -7,8 +7,12 @@ public class TimerNextScene : MonoBehaviour {
     public float timer;
     private float time;
     private int i;
-	// Use this for initialization
-	void Start () {
+    private bool fading = false;
+    private Animator anim;
+    // Use this for initialization
+    void Start () {
+        anim = GetComponent<Animator>();
+
         time = 0f;
         i = SceneManager.GetActiveScene().buildIndex;
 
@@ -16,10 +20,33 @@ public class TimerNextScene : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (time > timer)
-            SceneManager.LoadScene(i + 1);
+        if (fading)
+        {
+            if (time > timer)
+                SceneManager.LoadScene(i + 1);
+            else
+                time += Time.deltaTime;
+        }
         else
-            time += Time.deltaTime;
-                  
-	}
+        {
+            if (time > timer)
+            {
+                anim.Play("Fadeout");
+                fading = true;
+                timer = 1f;
+            }
+            else
+                time += Time.deltaTime;
+
+            if (Input.anyKey)
+            {
+                time = 0;
+                timer = 1f;
+                anim.Play("Fadeout");
+                fading = true;
+            }
+        }
+
+            //SceneManager.LoadScene(i + 1);
+    }
 }

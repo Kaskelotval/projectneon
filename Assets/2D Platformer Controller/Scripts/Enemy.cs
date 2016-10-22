@@ -23,7 +23,6 @@ public class Enemy : MonoBehaviour
     private Vector3 PatRightPos;
     public float Patrollspeed = 0.5f;
     private float chilltimer;
-    private bool outside = false;
     //ATTACKING//
     public Collider2D attackArea;
     public float AttackTimerMax = 1f;
@@ -88,7 +87,8 @@ public class Enemy : MonoBehaviour
                 player.addScore(100);
                 ScoreGiven = true;
             }
-            moveSpeed = 0;
+
+            moveSpeed = 0f;
             m_Anim.Play("Henchmandie");
             gravity = 0;
             colli.enabled = false;
@@ -149,7 +149,6 @@ public class Enemy : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log(AttackTimer);
                     attackArea.enabled = false;
                     AttackTimer -= Time.deltaTime;
                 }
@@ -168,7 +167,6 @@ public class Enemy : MonoBehaviour
                 if(me.position.x < PatLeftPos.x)
                 {
                     moveSpeed = 0f;
-                    chilltimer -= Time.deltaTime;
                     if(chilltimer<0)
                     {
                         me.transform.position = PatLeftPos + new Vector3(0.000001f, 0) ;
@@ -176,11 +174,12 @@ public class Enemy : MonoBehaviour
                         directionalInput = Vector2.Scale(directionalInput, redirect);
                         controller.Move(velocity * Time.deltaTime, directionalInput);
                     }
+                    chilltimer -= Time.deltaTime;
+
                 }
                 else if (me.position.x > PatRightPos.x)
                 {
                     moveSpeed = 0f;
-                    chilltimer -= Time.deltaTime;
                     if (chilltimer < 0)
                     {
                         me.transform.position = PatRightPos - new Vector3(0.000001f, 0);
@@ -188,6 +187,8 @@ public class Enemy : MonoBehaviour
                         directionalInput = Vector2.Scale(directionalInput, redirect);
                         controller.Move(velocity * Time.deltaTime, directionalInput);
                     }
+                    chilltimer -= Time.deltaTime;
+
                 }
                 else
                 {
@@ -276,6 +277,7 @@ public class Enemy : MonoBehaviour
         attacking = true;
         m_Anim.Play("HenchmanAttack");
         AttackTimer = AttackTimerMax;
+        isDetected = false;
     }
 
 

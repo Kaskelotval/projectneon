@@ -7,6 +7,14 @@ public class LoadSceneOnClick : MonoBehaviour
 
     public void LoadByIndex()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Intro");
+    }
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+    public void Quit()
+    {
+                Application.Quit();
     }
 }

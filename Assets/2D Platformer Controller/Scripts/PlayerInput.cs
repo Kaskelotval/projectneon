@@ -40,6 +40,14 @@ public class PlayerInput : MonoBehaviour
         {
             player.RestartScene();
         }
-            
+        if(Input.GetButtonDown("SlowMo"))
+        {
+            if (Time.timeScale == 1.0F)
+                Time.timeScale = 0.4F;
+            else
+                Time.timeScale = 1.0F;
+
+        }
+
     }
 }

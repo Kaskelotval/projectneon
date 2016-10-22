@@ -5,6 +5,7 @@ public class Raycaster : MonoBehaviour
 {
     public float distance = 5;
     private RaycastHit2D hit;
+    private RaycastHit2D hitb;
     private Ray ray;
     public Enemy me;
     private Collider2D col;
@@ -25,12 +26,20 @@ public class Raycaster : MonoBehaviour
         hit = Physics2D.Raycast(transform.position, direction*fwd, distance, 1 << LayerMask.NameToLayer("Player"));
         if (hit.collider != null)
         {
-            Debug.Log("Ray hit " +  hit.collider.name);
             if (hit.collider.name == "Player" && hit.collider.name != "Obstacle2")
                 transform.SendMessageUpwards("Detected");
         }
+        Vector3 bwd = transform.TransformDirection(Vector3.left);
+        Debug.DrawRay(transform.position, direction * bwd);
+        hitb = Physics2D.Raycast(transform.position, direction * bwd, 1, 1 << LayerMask.NameToLayer("Player"));
+        if (hitb.collider != null)
+        {
+            if (hitb.collider.name == "Player" && hitb.collider.name != "Obstacle2")
+                transform.SendMessageUpwards("Detected");
+        }
 
-                //hit.transform.SendMessage("HitByRay");
+
+        //hit.transform.SendMessage("HitByRay");
 
     }
 }   

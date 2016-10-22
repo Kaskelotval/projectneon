@@ -23,7 +23,7 @@ public class Civilian : MonoBehaviour
     private Vector3 PatRightPos;
     public float Patrollspeed = 0.5f;
     private float chilltimer;
-    private bool outside = false;
+
     //ATTACKING//
     public Collider2D attackArea;
     public float AttackTimerMax = 1f;

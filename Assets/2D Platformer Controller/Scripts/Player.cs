@@ -21,6 +21,12 @@ public class Player : MonoBehaviour
     public Animator scoreANIM;
     public GameObject death;
     public bool killlimit = false;
+    private float postkilltimerMax = 2f;
+    private float postkilltimer = 0f;
+
+    public AudioSource[] sounds;
+    private AudioSource Swosh;
+    private AudioSource Stab;
 
     private int kills = 0;
     public int MaxKills;
@@ -33,6 +39,7 @@ public class Player : MonoBehaviour
     private float attacktimer = 0;
     private float attackcd = 0.3f;
     public Collider2D attackTrigger;
+    private BoxCollider2D myCollider;
 
     //Getting atacked
     private float curHealth = 20;
@@ -65,6 +72,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        myCollider = GetComponent<BoxCollider2D>();
+        sounds = GetComponentsInChildren<AudioSource>();
+        Swosh = sounds[0];
+        Stab = sounds[1];
         cam.fieldOfView = 40;
         Time.timeScale = 1.0F;
         death.SetActive(false);
@@ -86,7 +97,9 @@ public class Player : MonoBehaviour
     {
         if(curHealth <= 0)
         {
-            cam.fieldOfView = 20;
+            myCollider.enabled = false;
+            attackTrigger.enabled = false;
+            cam.fieldOfView = 30;
             Time.timeScale = 0.2F;
             death.SetActive(true);
             combo = 0;
@@ -97,6 +110,7 @@ public class Player : MonoBehaviour
                 controller.Move(velocity * Time.deltaTime, directionalInput);
 
             }
+            
             //DestroyObject(attackTrigger);
             m_Anim.Play("MainGuyDeath");
             if (DeathTimer < 0)
@@ -111,7 +125,17 @@ public class Player : MonoBehaviour
         {
             CalculateVelocity();
             HandleWallSliding();
-            
+
+            if (kills == MaxKills && killlimit)
+            {
+                if (postkilltimer > postkilltimerMax)
+                {
+                    int i = SceneManager.GetActiveScene().buildIndex;
+                    SceneManager.LoadScene(i + 1);
+                }
+                else
+                    postkilltimer += Time.deltaTime;
+            }
             //m_Anim.SetBool("Attack", false);
 
             Run();
@@ -277,6 +301,7 @@ public class Player : MonoBehaviour
     {
         if (!attacking)
         {
+            Swosh.Play();
             attacking = true;
             attacktimer = attackcd;
             attackTrigger.enabled = true;
@@ -294,25 +319,16 @@ public class Player : MonoBehaviour
         else
             combo = 1;
 
+        Stab.Play();
         kills++;
         comboTimer = 0;
         score += addV*combo;
         scoreANIM.Play("ScoreBounce");
         UpdateScore();
-
-        if (kills == MaxKills && killlimit)
-        {
-            int i = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(i + 1);
-
-        }
-
-
-
     }
     void UpdateScore()
     {
-        killText.text = "Kills: " + kills;
+        killText.text = "Kills: " + kills + "/13";
         scoreText.text = "Score: " + score;
         if (combo > 1)
             comboText.text = "Multiplier: " + combo;
